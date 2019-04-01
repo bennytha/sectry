@@ -1,0 +1,18 @@
+.shadow {
+    margin-top: 10px;
+}
+
+.name {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.date {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.post {
+    margin: 0px 15px;
+}
+
