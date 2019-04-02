@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-9">
       <app-post></app-post>
     </div>
     <div class="col-md-3">
-    <app-login></app-login>
+      <router-outlet name='user'></router-outlet> 
+      <app-user></app-user>    
     </div>
   </div>
 </div>
