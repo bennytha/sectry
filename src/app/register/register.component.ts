@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataserviceService } from '../shared/dataservice.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -8,11 +10,25 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  userdeatails={};
+  myForm:FormGroup;
+
+  constructor(private sdata:DataserviceService, private fb:FormBuilder) { }
 
   ngOnInit() {
+    this.myForm = this.fb.group({
+      email:['', Validators.required],
+      name:['', Validators.required],
+      password:['', Validators.required]
+    })
   }
-  login() {
-    this.router.navigate([{ outlets: { user: 'login' } }])
+  
+  onsubmit(myform:FormGroup){    
+    this.userdeatails={
+      'name':myform.value.name,
+      'email':myform.value.email,
+      'password':myform.value.password
+    }
+    this.sdata.adduser(this.userdeatails).subscribe();
   }
 }
