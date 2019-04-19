@@ -2,18 +2,34 @@
   <div class="row">
     <label class="name">Register</label>
   </div>
-  <form [formGroup]="myForm" (submit)="onsubmit(myForm)">
+  <form [formGroup]="myForm" (submit)="onsubmit(myForm)" novalidate>
     <div class="row">
-      <input type="text" formControlName="name" placeholder="Name" class="form-control" [ngStyle]="{'margin':'10px'}">
+      <input [class.is-invalid]="!myForm.get('name').valid && myForm.get('name').touched" type="text"
+        formControlName="name" placeholder="Name" class="form-control" [ngStyle]="{'margin':'10px'}" required>
+    </div>
+    <div class="" [ngStyle]="{'color':'red','font-size':'13px'}"
+      *ngIf="!myForm.get('name').valid && myForm.get('name').touched">
+      Please provide a valid Name.
     </div>
     <div class="row">
-      <input type="text"  formControlName="email" placeholder="Email" class="form-control" [ngStyle]="{'margin':'10px'}">
+      <input type="email" [class.is-invalid]="!myForm.get('email').valid && myForm.get('email').touched" formControlName="email" placeholder="Email" class="form-control"
+        [ngStyle]="{'margin':'10px'}">
+    </div>
+    <div class="" [ngStyle]="{'color':'red','font-size':'13px'}"
+      *ngIf="!myForm.get('email').valid && myForm.get('email').touched">
+      Please provide a valid email.
     </div>
     <div class="row">
-      <input type="password" formControlName="password" placeholder="Password" class="form-control" [ngStyle]="{'margin':'10px'}">
+      <input type="password" [class.is-invalid]="!myForm.get('password').valid && myForm.get('password').touched" formControlName="password" placeholder="Password" class="form-control"
+        [ngStyle]="{'margin':'10px'}">
     </div>
+    <div class="" [ngStyle]="{'color':'red','font-size':'13px'}"
+      *ngIf="!myForm.get('password').valid && myForm.get('password').touched">
+      Please provide a password with minimun 6 characters.
+    </div>    
     <div class="row">
-      <button type="submit" class="btn btn-primary form-control" [ngStyle]="{'margin':'10px'}">Register</button>
+      <button type="submit" class="btn btn-primary form-control" [disabled]="myForm.invalid"
+        [ngStyle]="{'margin':'10px'}">Register</button>
     </div>
   </form>
   <div class="row">

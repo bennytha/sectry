@@ -27,3 +27,6 @@
 .hrmargin{
     margin-bottom: 5px;
 }
+.mb-5{
+    margin-bottom: auto!important;
+}

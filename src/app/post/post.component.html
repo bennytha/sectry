@@ -1,24 +1,44 @@
-<div class="shadow p-3 mb-5 bg-white rounded">
+<div *ngIf="newpost" class="shadow p-3 mb-5 bg-white rounded">
   <div class="row d-flex justify-content-between">
-    <div class="name">Name</div>
-    <div class="date">Date</div>
+    <div class="name">New Post</div>
+  </div>
+  <hr>
+  <form [formGroup]="myForm" (submit)="onsubmit(myForm)">
+    <div class="row">
+      <textarea class="form-control" formControlName="post" [ngStyle]="{'margin':'0px 15px'}" rows="3"
+        id="comment"></textarea>
+    </div>
+    <hr class="hrmargin">
+    <div class="row">
+      <div class="col-md-2 ">
+        <button class="btn btn-success form-control" type="submit" [ngStyle]="{'margin':'5px 0px'}">Add</button>
+      </div>
+      <div class="col-md-2 ">
+        <button class="btn btn-danger form-control" (click)="cancel()" [ngStyle]="{'margin':'5px 0px'}">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div class="shadow p-2 mb-5 bg-white rounded" *ngFor="let post of oldpost">
+  <div class="row d-flex justify-content-between">
+    <div class="name">{{post.name|uppercase}}</div>
+    <div class="date">{{post.date|date}}</div>
   </div>
   <hr>
   <div class="row">
-    <p class="text-justify post">Flexbox can do some pretty awesome things when you mix flex alignments with auto
-      margins. Shown below are three examples of controlling flex items via auto margins: default (no auto
-      margin), pushing two items to the right (.mr-auto), and pushing two items to the left (.ml-auto).</p>
+    <p class="text-justify post">{{post.post}}</p>
   </div>
   <hr class="hrmargin">
   <div class="row">
-    <div class="col-md-2 ">      
+    <div class="col-md-2 ">
       <button class="btn btn-success opbutton"></button>
-      <span>1964</span>
+      <span>{{post.likes?.length}}</span>
     </div>
-    <div class="col-md-2 ">      
+    <div class="col-md-2 ">
       <button class="btn btn-danger opbutton"></button>
-      <span>12</span>
+      <span>{{post.dislike?.length}}</span>
     </div>
-
   </div>
 </div>
