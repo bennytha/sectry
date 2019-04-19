@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class DataserviceService {
   }
 
   me(){
-    return this.http.get(this.url+'/user/me');
+    return this.http.get<User>(this.url+'/user/me');
   }
   login(user){  
     return this.http.post(this.url+'/user/login',user);

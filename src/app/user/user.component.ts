@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../shared/dataservice.service';
 import { Router } from '@angular/router';
 import { SharedataService } from '../shared/sharedata.service';
+import { User } from "../model/user";
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,7 @@ export class UserComponent implements OnInit {
 
   npost: boolean = false;
   login: boolean = false;
-  profile = {};
+  profile:User;
   constructor(private sdata: DataserviceService, private router: Router, private sharedata: SharedataService) {
     this.sdata.me().subscribe((data) => {
       this.profile = data;
