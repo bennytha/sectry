@@ -7,8 +7,8 @@ import { User } from '../model/user';
 })
 export class DataserviceService {
 
-  // url: String = 'http://localhost:3000';
-  url: String = 'https://ewall-api.herokuapp.com';
+  url: String = 'http://localhost:3000';
+  // url: String = 'https://ewall-api.herokuapp.com';
 
 
   constructor(private http: HttpClient) { }
@@ -28,6 +28,14 @@ export class DataserviceService {
   }
   addPost(post){
     return this.http.post(this.url+'/post',post);
+  }
+
+  like(id,userid){
+    return this.http.put<any[]>(this.url+'/like/'+id,userid);
+  }
+
+  dislike(id,userid){
+    return this.http.put<any[]>(this.url+'/dislike/'+id,userid);
   }
 
   getpost(){

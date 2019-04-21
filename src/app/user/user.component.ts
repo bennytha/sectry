@@ -29,6 +29,7 @@ export class UserComponent implements OnInit {
     localStorage.removeItem('login');
     localStorage.removeItem('user');
     this.router.navigate([{ outlets: { user: 'login' } }]);
+    this.sharedata.changeMessage(false);
   }
 
   newpost() {

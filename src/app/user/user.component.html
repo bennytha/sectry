@@ -1,6 +1,6 @@
 <div class="shadow p-3 mb-5 bg-white rounded ">
     <div class="row">
-      <label class="name">Welcome, <span>{{profile.name|uppercase}}</span></label>
+      <label class="name">Welcome, <span>{{profile?.name|uppercase}}</span></label>
     </div>
     <div class="row">      
       <button class="btn btn-info form-control" (click)="newpost()" [ngStyle]="{'margin':'10px'}">Add Post</button>

@@ -3,6 +3,7 @@ import { SharedataService } from '../shared/sharedata.service';
 import { DataserviceService } from '../shared/dataservice.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { UrlSerializer } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -16,13 +17,12 @@ export class PostComponent implements OnInit {
   myForm: FormGroup;
   oldpost: any[];
 
-  l
 
   constructor(private sharedata: SharedataService, private sdata: DataserviceService, private fb: FormBuilder, private toastr: ToastrService) {
     this.sdata.getpost().subscribe((data) => {
       this.oldpost = data;
     });
-    
+
     this.userdetails = JSON.parse(localStorage.getItem('user'));
   }
 
@@ -47,25 +47,41 @@ export class PostComponent implements OnInit {
     myForm.reset();
     this.success();
     this.sdata.getpost().subscribe((data) => {
-      console.log(data);      
+      console.log(data);
       this.oldpost = data;
     });
   }
 
-  // like(postid){
-  //   this.userdetails = JSON.parse(localStorage.getItem('user'));
-  //   if(this.userdetails.name!=''){
-  //     if(this.userdetails.posts.lenght!=0){
-  //       for(let i=0;i<this.userdetails.posts.lenght;i++){
-  //         if(postid==this.userdetails.posts[i].postid){
-  //           if(this.userdetails.post[i].like=='like'){
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  
+  like(pid) {
+    this.userdetails = JSON.parse(localStorage.getItem('user'));
+    try {
+      if (this.userdetails._id != null) {
+        this.sdata.like(pid, this.userdetails).subscribe((data) => {
+          this.oldpost = data;
+        });
+      }
+    }
+    catch (err) {
+      console.log('not logged in');
+      this.notlogged('Login to Like');
+    }
+  }
+
+  dislike(pid) {
+    this.userdetails = JSON.parse(localStorage.getItem('user'));
+    try {
+      if (this.userdetails._id != null) {
+        this.sdata.dislike(pid, this.userdetails).subscribe((data) => {
+          this.oldpost = data;
+        });
+      }
+    }
+    catch (err) {
+      console.log('not logged in');
+      this.notlogged('Login to Dislike');
+    }
+  }
+
 
 
 
@@ -74,6 +90,10 @@ export class PostComponent implements OnInit {
   }
 
   success() {
-    this.toastr.success("Post added !")
+    this.toastr.success("Post added !");
+  }
+
+  notlogged(message) {
+    this.toastr.warning(message);
   }
 }

@@ -33,12 +33,12 @@
   <hr class="hrmargin">
   <div class="row">
     <div class="col-md-2 ">
-      <button class="btn btn-success opbutton"></button>
+      <button (click)="like(post._id)" class="btn btn-success opbutton"></button>
       <span>{{post.likes?.length}}</span>
     </div>
     <div class="col-md-2 ">
-      <button class="btn btn-danger opbutton"></button>
-      <span>{{post.dislike?.length}}</span>
+      <button (click)="dislike(post._id)" class="btn btn-danger opbutton"></button>
+      <span>{{post.dislikes?.length}}</span>
     </div>
   </div>
 </div>
