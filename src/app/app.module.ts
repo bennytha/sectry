@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './shared/interceptor.service';
+import { AuthGuardService } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -37,10 +38,12 @@ import { InterceptorService } from './shared/interceptor.service';
       timeOut:10000,
       positionClass:'toast-bottom-right',
       preventDuplicates:true,
-    })
+      
+    }),
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi:true},
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

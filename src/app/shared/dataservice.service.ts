@@ -7,8 +7,8 @@ import { User } from '../model/user';
 })
 export class DataserviceService {
 
-  // url: String = 'http://localhost:3000';
-  url: String = 'https://ewall-api.herokuapp.com';
+  url: String = 'http://localhost:3000';
+  // url: String = 'https://ewall-api.herokuapp.com';
 
 
   constructor(private http: HttpClient) { }

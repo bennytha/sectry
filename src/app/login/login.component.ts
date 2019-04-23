@@ -12,8 +12,20 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
   login = {};
   myForm: FormGroup;
+  user:any;
 
-  constructor(private router: Router, private fb: FormBuilder, private sdata: DataserviceService, private toastr:ToastrService) { }
+  constructor(private router: Router, private fb: FormBuilder, private sdata: DataserviceService, private toastr:ToastrService) {
+    this.user = JSON.parse(localStorage.getItem('login'));
+    try {
+      if (this.user.token == null) {
+      } else {
+        this.router.navigate([{ outlets: { user: 'user' } }]);
+      }
+    }
+    catch{     
+     
+    }
+   }
 
   ngOnInit() {
     this.myForm = this.fb.group({
